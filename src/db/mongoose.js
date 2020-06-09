@@ -1,11 +1,24 @@
 import mongoose from 'mongoose';
 
 const connectToDatabase = () => {
-    mongoose.connect('mongodb://team-granite:granite1@ds047065.mlab.com:47065/team-granite',{
+
+	const {
+	  	MONGO_USERNAME,
+	  	MONGO_PASSWORD,
+	  	MONGO_HOSTNAME,
+	  	MONGO_PORT,
+	  	MONGO_DB
+	} = process.env;
+
+	const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
+    mongoose.connect(url,{
         useUnifiedTopology: true,
         useNewUrlParser: true,
         useCreateIndex: true,
-        useFindAndModify: false
+        useFindAndModify: false,
+	  	reconnectTries: Number.MAX_VALUE,
+	  	reconnectInterval: 500, 
+	  	connectTimeoutMS: 10000,
     });
     mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 };

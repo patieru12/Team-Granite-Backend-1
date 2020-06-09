@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Dockerized user management app",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "start": "node -r esm app.js",
     "dev": "nodemon app.js"
@@ -18,5 +19,14 @@
     "mongoose": "^5.9.18",
     "nodemon": "^2.0.4",
     "validator": "^13.0.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patieru12/Team-Granite-Backend-1.git"
+  },
+  "bugs": {
+    "url": "https://github.com/patieru12/Team-Granite-Backend-1/issues"
+  },
+  "homepage": "https://github.com/patieru12/Team-Granite-Backend-1#readme"
 }
