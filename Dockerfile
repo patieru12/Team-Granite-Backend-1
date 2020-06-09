@@ -14,5 +14,5 @@ RUN npm install --save esm
 COPY --chown=node:node . .
 
 EXPOSE 8080
-
-CMD [ "node", "app.js" ]
+#RUN npm -r esm app.js
+CMD [ "node", "-r esm app.js" ]

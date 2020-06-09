@@ -1,14 +1,13 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
-import connectToDatabase from './src/db/mongoose.js';
-import User from './src/models/user.js';
+import connectToDatabase from './src/db/mongoose';
+import User from './src/models/user';
 
 dotenv.config();
 connectToDatabase();
 
-// const routes = require('./src/routes/index');
-import routes from './src/routes/index.js';
+const routes = require('./src/routes/index');
 
 const app = express();
 const port = process.env.PORT || 5000;
