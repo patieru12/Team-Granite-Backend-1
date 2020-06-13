@@ -11,15 +11,15 @@ const port = process.env.PORT || 5000;
 const connectToDatabase = require("./db"); //require('./src/db/mongoose');
 
 dotenv.config();
- //connectToDatabase(); //This removed to simplify the connection
+//connectToDatabase(); //This removed to simplify the connection
 
 
-
-app.use('/v1/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use('/v1', router);
+
 app.use('/', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
 app.use('/src', express.static('img'))
 

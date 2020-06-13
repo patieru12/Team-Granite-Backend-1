@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const newUser = require('../controllers/userController');
+const company = require('../controllers/companyController');
 const upload = require('../controllers/upload');
 const auth = require('../middleware/auth')
 
@@ -9,7 +10,7 @@ const auth = require('../middleware/auth')
 // GET response for '/'
 router.get('/', (req, res) => {
     
-    res.redirect('/v1/api-docs');
+    res.redirect('/api-docs');
 })
 
 //generate token
@@ -94,7 +95,7 @@ router.get('/users/status/inactive',auth, newUser.getInActiveUsers);
 router.get('/users/level/intern',auth, newUser.getInternUsers);
 
 //get mentor users
-router.get('/users/level/mentor',auth, newUser.getMentorUsers);
+//router.get('/users/level/mentor',auth, newUser.getMentorUsers);
 
 //Get Avatar
 router.get('/users/:id/avatar',auth, newUser.getUserAvatar);
@@ -104,6 +105,39 @@ router.put('/users/:id/avatar',auth, upload.single('avatar'), newUser.setUserAva
 
 //Delete Avatar
 router.delete('/users/:id/avatar',auth, newUser.removeUserAvatar);
+
+//Add user to a team
+router.post('/companies/teams/:id/users', auth, company.setUserTeamName);
+
+//Get a users team
+router.get('/companies/teams/:id/users',auth, company.getUserTeam);
+
+//Get a users company
+router.get('/companies/:id/user', auth, company.getUserCompany);
+
+//Add user to a company
+router.post('/companies/:id/users', auth, company.setUserCompanyName);
+
+//Create new company
+router.post('/companies', auth, company.createCompany);
+
+//create a new team
+router.post('/companies/:id/teams', auth, company.createTeam);
+
+//Get All companies
+router.get('/companies', auth, company.getAllCompanies);
+
+//Get a company
+router.get('/companies/:id', auth, company.getCompanyName);
+
+//Get users
+router.get('/companies/:id/users', auth, company.getCompanyMembers);
+
+//Get team members
+router.get('/companies/team/users', auth, company.getTeamMembers);
+
+//Get Teams under a company
+router.get('/companies/:id/teams', auth, company.getAllTeams);
 
 
 module.exports= router;
